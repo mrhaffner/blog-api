@@ -7,9 +7,4 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
 });
 
-// MessageSchema.virtual('url').get(function() {
-//     //UPDATE ROUTE
-//     return `/blah/message${this.id}`
-// });
-
 module.exports = mongoose.model('User', UserSchema);
