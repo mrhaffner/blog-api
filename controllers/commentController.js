@@ -1,10 +1,11 @@
-const Comment = require('../models/comment')
+const Comment = require('../models/comment');
+const { body, validationResult } = require('express-validator');
 
 exports.create_comment = [
     body('text', 'Text must be specified').trim().isLength({ min: 1 }).escape(),
     body('author', 'Author must be specified').trim().isLength({ min: 1 }).escape(),
     (req, res, next) => {
-        const errors = validationsResult(req);
+        const errors = validationResult(req);
         const comment = new Comment(
             {
                 text: req.body.text,
