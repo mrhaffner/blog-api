@@ -1,6 +1,6 @@
-import Comment from '../models/comment'
+const Comment = require('../models/comment')
 
-const create_comment = [
+exports.create_comment = [
     body('text', 'Text must be specified').trim().isLength({ min: 1 }).escape(),
     body('author', 'Author must be specified').trim().isLength({ min: 1 }).escape(),
     (req, res, next) => {
@@ -22,7 +22,7 @@ const create_comment = [
     }
 ];
 
-const delete_comment = (req, res, next) => {
+exports.delete_comment = (req, res, next) => {
     Comment.findByIdAndRemove(req.params.id, (err) => {
         if (err) { return next(err); };
         res.sendStatus(200);
@@ -30,8 +30,3 @@ const delete_comment = (req, res, next) => {
 };
 
 //do I need to get a list of comments? Maybe that should happen on getting a post?
-
-export { 
-    create_comment, 
-    delete_comment
-}

@@ -1,6 +1,6 @@
-import { Router } from 'express';
-const router = Router();
-import * as postController from '../controllers/postController'
+const express = require('express');
+const router = express.Router();
+const postController = require('../controllers/postController')
 
 //lists all posts
 router.get('/', postController.list_post)
@@ -20,5 +20,4 @@ router.put('/:id/update', postController.update_post)
 //deletes a post
 router.delete('/:id/delete', postController.delete_post)
 
-
-export default router;
+module.export = router;

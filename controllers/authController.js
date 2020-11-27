@@ -1,15 +1,9 @@
-import User from '../models/user'
-/// ?maybe?
+const User = require('../models/user');
 
-const login_auth = (req, res, next) => {
+exports.login_auth = (req, res, next) => {
     
 };
 
-const logout_auth = (req, res, next) => {
+exports.logout_auth = (req, res, next) => {
     
 };
-
-export { 
-    login_auth, 
-    logout_auth
-}

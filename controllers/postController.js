@@ -1,7 +1,7 @@
-import Post from '../models/post'
-import Comment from '../models/comment'
+const Post = require('../models/post')
+const Comment = require('../models/comment')
 
-const list_post = (req, res, next) => {
+exports.list_post = (req, res, next) => {
     Post.find({})
         .exec((err, post_list) => {
             if (err) return next(err)
@@ -9,7 +9,7 @@ const list_post = (req, res, next) => {
     })
 };
 
-const display_post = (req, res, next) => {
+exports.display_post = (req, res, next) => {
     Post.findById(req.params.id)
     .exec((err, post) => {
         if (err) {
@@ -23,7 +23,7 @@ const display_post = (req, res, next) => {
     })
 }; //should this also get all associated comments?
 
-const create_post = (req, res, next) => {
+exports.create_post = (req, res, next) => {
     const post = new Post({
         title: req.body.title,
         text: req.body.text,
@@ -33,7 +33,7 @@ const create_post = (req, res, next) => {
     })
 };
 
-const update_post = (req, res, next) => {
+exports.update_post = (req, res, next) => {
     const post = new Post({
         title: req.body.title,
         text: req.body.text,
@@ -47,7 +47,7 @@ const update_post = (req, res, next) => {
     })
 };
 
-const delete_post = async (req, res, next) => {
+exports.delete_post = async (req, res, next) => {
     try {
         await Comment.deleteMany( {post: req.params.id} );
         await Post.findByIdAndRemove(req.params.id);
@@ -59,11 +59,3 @@ const delete_post = async (req, res, next) => {
 }
 
 //do I need something for updated isPublished?
-
-export {
-    list_post, 
-    display_post, 
-    create_post, 
-    update_post, 
-    delete_post
-}
