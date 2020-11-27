@@ -10,7 +10,7 @@ exports.list_post = (req, res, next) => {
 };
 
 exports.display_post = (req, res, next) => {
-    Post.findById(req.params.id)
+    Post.findById(req.params.postId)
     .exec((err, post) => {
         if (err) {
             return next(err)
@@ -40,9 +40,9 @@ exports.update_post = (req, res, next) => {
         text: req.body.text,
         //date: new Date(req.body.date), //maybe just leave it out?
         //isPublished?
-        _id: req.params.id
+        _id: req.params.postId
     });
-    Post.findByIdAndUpdate(req.params.id, post, {}, (err) => {
+    Post.findByIdAndUpdate(req.params.postId, post, {}, (err) => {
         if (err) { return next(err); };
         res.sendStatus(201);
     })
@@ -50,8 +50,8 @@ exports.update_post = (req, res, next) => {
 
 exports.delete_post = async (req, res, next) => {
     try {
-        await Comment.deleteMany( {post: req.params.id} );
-        await Post.findByIdAndRemove(req.params.id);
+        await Comment.deleteMany( {post: req.params.postId} );
+        await Post.findByIdAndRemove(req.params.postId);
         res.sendStatus(200);
     } catch (err) {
         debug(err);
