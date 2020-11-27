@@ -10,7 +10,7 @@ exports.create_comment = [
             {
                 text: req.body.text,
                 author: req.body.author,
-                post: req.params.postId, //updated correctly?
+                post: req.params.postId,
             }
         );
         if (!errors.isEmpty()) {
