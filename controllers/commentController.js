@@ -16,14 +16,17 @@ const create_comment = [
             return res.status(400).json( { message: 'Validation errors', errors: validationResults.errors });
         };
         comment.save((err) => {
-            if (err) { return next(err); }
+            if (err) { return next(err); };
             res.sendStatus(201);
         })
     }
 ];
 
 const delete_comment = (req, res, next) => {
-    
+    Comment.findByIdAndRemove(req.params.id, (err) => {
+        if (err) { return next(err); };
+        res.sendStatus(200);
+    })
 };
 
 //do I need to get a list of comments? Maybe that should happen on getting a post?
