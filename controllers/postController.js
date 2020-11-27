@@ -27,6 +27,7 @@ exports.create_post = (req, res, next) => {
     const post = new Post({
         title: req.body.title,
         text: req.body.text,
+        date: Date.now()
     }).save((err) => {
         if (err) { return next(err); }
         res.sendStatus(201);
@@ -37,7 +38,7 @@ exports.update_post = (req, res, next) => {
     const post = new Post({
         title: req.body.title,
         text: req.body.text,
-        date: new Date(req.body.date), //maybe just leave it out?
+        //date: new Date(req.body.date), //maybe just leave it out?
         //isPublished?
         _id: req.params.id
     });

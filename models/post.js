@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
     title: { type: String, required: true, maxlength: 40 },
     text: { type: String, required: true, maxlength: 150 },
-    date: { type: Date, default: Date.now },
+    date: { type: Date, required: true },
     isPublished: { type: Boolean, default: false }
 });
 
