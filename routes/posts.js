@@ -20,4 +20,4 @@ router.put('/:id/update', postController.update_post)
 //deletes a post
 router.delete('/:id/delete', postController.delete_post)
 
-module.export = router;
+module.exports = router;

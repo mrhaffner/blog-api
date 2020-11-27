@@ -8,4 +8,4 @@ router.post('/login', authController.login_auth)
 //logout
 router.post('/logout', authController.logout_auth)
 
-module.export = router;
+module.exports = router;

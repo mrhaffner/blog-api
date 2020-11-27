@@ -11,4 +11,4 @@ router.post('/comment', commentController.create_comment)
 //delete a comment
 router.delete('/:id', commentController.delete_comment)
 
-module.export = router;
+module.exports = router;
