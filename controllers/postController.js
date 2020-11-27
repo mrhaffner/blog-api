@@ -21,7 +21,7 @@ const display_post = (req, res, next) => {
         }
         res.json(post); //what does this even mean lmao
     })
-};
+}; //should this also get all associated comments?
 
 const create_post = (req, res, next) => {
     const post = new Post({
@@ -29,7 +29,7 @@ const create_post = (req, res, next) => {
         text: req.body.text,
     }).save((err) => {
         if (err) { return next(err); }
-        res.sendStatus(200);
+        res.sendStatus(201);
     })
 };
 
@@ -38,6 +38,7 @@ const update_post = (req, res, next) => {
         title: req.body.title,
         text: req.body.text,
         date: new Date(req.body.date), //maybe just leave it out?
+        //isPublished?
         _id: req.params.id
     });
     Post.findByIdAndUpdate(req.params.id, post, {}, (err) => {
@@ -57,7 +58,9 @@ const delete_post = async (req, res, next) => {
     }
 }
 
-export { 
+//do I need something for updated isPublished?
+
+export {
     list_post, 
     display_post, 
     create_post, 
