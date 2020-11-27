@@ -10,11 +10,11 @@ exports.create_comment = [
             {
                 text: req.body.text,
                 author: req.body.author,
-                post: req.params.id,
+                post: req.params.postId, //updated correctly?
             }
         );
-        if (validationResults.errors.length) {
-            return res.status(400).json( { message: 'Validation errors', errors: validationResults.errors });
+        if (!errors.isEmpty()) {
+            return res.status(400).json( { message: 'Validation errors', errors: validationResult.errors });
         };
         comment.save((err) => {
             if (err) { return next(err); };
@@ -24,7 +24,7 @@ exports.create_comment = [
 ];
 
 exports.delete_comment = (req, res, next) => {
-    Comment.findByIdAndRemove(req.params.id, (err) => {
+    Comment.findByIdAndRemove(req.params.commentId, (err) => {
         if (err) { return next(err); };
         res.sendStatus(200);
     })

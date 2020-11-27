@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //do I need a '/' for this project?????????
 app.use('/blog', postRouter)
-app.use('/blog/comment', commentRouter)
+app.use('/blog', commentRouter)
 //add auth!!!
 
 
