@@ -5,6 +5,7 @@ const router = express.Router();
 const authController = require('../controllers/authController')
 
 //login
+//move this to authController
 router.post(
     '/login',
     async (req, res, next) => {
@@ -25,7 +26,7 @@ router.post(
                             if (error) return next(error);
         
                             const body = { _id: user._id, username: user.username };
-                            const token = jwt.sign({ user: body }, 'TOP_SECRET');
+                            const token = jwt.sign({ user: body }, 'TOP_SECRET', {expiresIn: '1d'}); //change expire?
         
                             return res.json({ token });
                         }
@@ -39,18 +40,19 @@ router.post(
 );
 
 //logout
+//need to implement this
 router.post('/logout', authController.logout_auth)
 
 
-router.post(
-    '/signup',
-    passport.authenticate('signup', { session: false }),
-    async (req, res, next) => {
-      res.json({
-        message: 'Signup successful',
-        user: req.user
-      });
-    }
-  );
+// router.post(
+//     '/signup',
+//     passport.authenticate('signup', { session: false }),
+//     async (req, res, next) => {
+//       res.json({
+//         message: 'Signup successful',
+//         user: req.user
+//       });
+//     }
+//   );
 
 module.exports = router;
