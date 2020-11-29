@@ -3,10 +3,10 @@ const router = express.Router();
 const postController = require('../controllers/postController')
 const passport = require('passport');
 const auth = passport.authenticate('jwt', { session: false })
-require('../auth/auth');
+require('../config/passport');
 
 //lists all posts
-router.get('/', postController.list_post)
+router.get('/', auth, postController.list_post)
 
 //maybe have a nonprotected route only for published posts??? Don't want that available huh.
 //have protected route for unpublished
