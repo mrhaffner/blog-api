@@ -1,6 +1,7 @@
 require('dotenv').config()
 const createError = require('http-errors');
 const express = require('express');
+var cors = require('cors')
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -34,7 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 //app.use(bodyParser.urlencoded({ extended: false })); //do i need this?
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors())
 //do I need a '/' for this project?????????
 app.use('/', authRouter);
 //app.use('/blog', postRouter);
