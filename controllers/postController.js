@@ -1,6 +1,15 @@
 const Post = require('../models/post')
 const Comment = require('../models/comment')
 
+
+exports.list_published_post = (req, res, next) => {
+    Post.find({ isPublished: true })
+        .exec((err, post_list) => {
+            if (err) return next(err)
+            res.json(post_list);
+    })
+};
+
 exports.list_post = (req, res, next) => {
     Post.find({})
         .exec((err, post_list) => {
