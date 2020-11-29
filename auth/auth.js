@@ -1,11 +1,11 @@
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
-const UserModel = require('../models/user'); //point of failure?
+const User = require('../models/user'); //point of failure?
 
 const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 
-passport.use(
+passport.use( //get rid of this
     'signup',
     new localStrategy(
         {
@@ -14,7 +14,7 @@ passport.use(
         },
         async (username, password, done) => {
             try {
-                const user = await UserModel.create({ username, password });
+                const user = await User.create({ username, password });
     
                 return done(null, user);
             } catch (error) {
@@ -33,7 +33,7 @@ passport.use(
         },
         async (username, password, done) => {
             try {
-                const user = await UserModel.findOne({ username });
+                const user = await User.findOne({ username });
     
                 if (!user) {
                     return done(null, false, { message: 'User not found' });
@@ -57,7 +57,7 @@ passport.use(
     new JWTstrategy(
         {
             secretOrKey: 'TOP_SECRET',
-            jwtFromRequest: ExtractJWT.fromUrlQueryParameter('secret_token') //probably don't want it in the URL
+            jwtFromRequest: ExtractJWT.fromAuthHeaderWithScheme('JWT') //probably don't want it in the URL
         },
         async (token, done) => {
             try {
