@@ -8,7 +8,7 @@ require('../auth/auth');
 //maybe want to get a list of comment for a post and/or single post
 
 //create a comment
-router.post('/:postId/comment', auth, commentController.create_comment)
+router.post('/:postId/comment', commentController.create_comment)
 
 //delete a comment
 router.delete('/:postId/comment/:commentId', auth, commentController.delete_comment)
