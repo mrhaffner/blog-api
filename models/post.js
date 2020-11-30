@@ -9,6 +9,10 @@ const PostSchema = new Schema({
     isPublished: { type: Boolean, default: false }
 });
 
+// PostSchema.virtual('hyphenTitle').get(function() {
+//     return this.title.toLowerCase().split(' ').join('-')
+// })
+
 // MessageSchema.virtual('url').get(function() {
 //     //UPDATE ROUTE
 //     return `/blah/message${this.id}`

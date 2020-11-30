@@ -6,6 +6,8 @@ const auth = passport.authenticate('jwt', { session: false })
 require('../auth/auth');
 
 //maybe want to get a list of comment for a post and/or single post
+//get all comments
+router.get('/comments', commentController.list_comment)
 
 //create a comment
 router.post('/:postId/comment', commentController.create_comment)

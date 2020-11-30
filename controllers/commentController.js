@@ -1,6 +1,14 @@
 const Comment = require('../models/comment');
 const { body, validationResult } = require('express-validator');
 
+exports.list_comment = (req, res, next) => {
+    Comment.find({})
+        .exec((err, comment_list) => {
+            if (err) return next(err)
+            res.json(comment_list);
+    })
+};
+
 exports.create_comment = [
     body('text', 'Text must be specified').trim().isLength({ min: 1 }).escape(),
     body('author', 'Author must be specified').trim().isLength({ min: 1 }).escape(),
