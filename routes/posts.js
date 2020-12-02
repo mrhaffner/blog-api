@@ -23,8 +23,12 @@ router.post('/', auth, postController.create_post)
 // //gets edit form for specific post --- I don't think I need this, can populate from the json?
 // router.get('/:id', postController.)
 
-//updates a specific post
+//updates a specific post's title and text
 router.put('/:postId/update', auth, postController.update_post)
+
+//updates a specific post's isPublished status
+//add back auth!!!!!!!
+router.put('/:postId/publish', postController.publish_post)
 
 //deletes a post
 router.delete('/:postId/delete', auth, postController.delete_post)

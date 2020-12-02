@@ -57,6 +57,20 @@ exports.update_post = (req, res, next) => {
     })
 };
 
+exports.publish_post = (req, res, next) => {
+    const post = new Post({
+        // title: req.body.title,
+        // text: req.body.text,
+        //date: new Date(req.body.date), //maybe just leave it out?
+        isPublished: req.body.published,
+        _id: req.params.postId
+    });
+    Post.findByIdAndUpdate(req.params.postId, post, {}, (err) => {
+        if (err) { return next(err); };
+        res.sendStatus(201);
+    })
+};
+
 exports.delete_post = async (req, res, next) => {
     try {
         await Comment.deleteMany( {post: req.params.postId} );

@@ -10,8 +10,8 @@ exports.list_comment = (req, res, next) => {
 };
 
 exports.create_comment = [
-    body('text', 'Text must be specified').trim().isLength({ min: 1 }).escape(),
-    body('author', 'Author must be specified').trim().isLength({ min: 1 }).escape(),
+    body('text', 'Text must be specified').trim().isLength({ min: 1 }),
+    body('author', 'Author must be specified').trim().isLength({ min: 1 }),
     (req, res, next) => {
         const errors = validationResult(req);
         const comment = new Comment(
