@@ -10,9 +10,10 @@ require('../auth/auth');
 router.get('/comments', commentController.list_comment)
 
 //create a comment
-router.post('/:postId/comment', commentController.create_comment)
+router.post('/:postId/comment', auth, commentController.create_comment)
 
 //delete a comment
+//add auth back!!!!!!!!!!!!!!!!!!
 router.delete('/:postId/comment/:commentId', auth, commentController.delete_comment)
 
 module.exports = router;
